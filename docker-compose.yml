@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
+    container_name: jenkins-local
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    environment:
+      JENKINS_OPTS: --prefix=/jenkins
+    volumes:
+      - jenkins_home:/var/jenkins_home  # Persistent storage for Jenkins data
+      - /var/run/docker.sock:/var/run/docker.sock  # For Docker-in-Docker functionality
+
+volumes:
+  jenkins_home:
